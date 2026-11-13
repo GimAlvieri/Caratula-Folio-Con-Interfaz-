@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carátulas de Folio | Municipalidad</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-mark">M</div>
+    <div><strong>CARÁTULAS DE FOLIO</strong><small>Gestión documental municipal</small></div>
+    <div class="municipality-name" id="municipalityName">MUNICIPALIDAD DISTRITAL</div>
+  </header>
+  <main class="workspace">
+    <section class="editor-panel">
+      <div class="panel-heading"><div><span class="eyebrow">GESTIÓN DE FOLIOS</span><h1 id="formTitle">Nuevo folio</h1></div><span class="status-dot">En edición</span></div>
+      <form id="folioForm">
+        <input id="folioId" type="hidden">
+        <div class="form-row split"><div class="field"><label for="folio">N.º de folio</label><input id="folio" required placeholder="Ej. 07"></div><div class="field"><label for="bloque">N.º de bloque</label><input id="bloque" placeholder="Ej. 02"></div></div>
+        <div class="field"><label for="periodo">Periodo</label><input id="periodo" required placeholder="Ej. 2019 o 2019–2022"></div>
+        <div class="field"><label for="ubicacion">Ubicación del documento</label><input id="ubicacion" placeholder="Ej. Oficina de Recursos Humanos"></div>
+        <div class="field"><label for="tipoDocumento">Tipo de documento</label><input id="tipoDocumento" placeholder="Ej. Currículum vitae, resolución, informe"></div>
+        <div class="people-heading"><label>Documentos encontrados</label><span id="peopleCount">0</span></div>
+        <p class="entry-help">Escribe el rango de páginas (por ejemplo, 01-13) y el total se calculará solo.</p>
+        <div id="entries" class="entries"></div>
+        <div class="entry-actions">
+          <button type="button" class="action-add" id="addPerson">＋ Agregar documento</button>
+          <button type="button" class="action-separator" id="addSeparator" title="Se conserva al editar el folio, pero no aparece en la hoja ni en el Excel exportado">＋ Agregar separador / tema</button>
+          <button type="button" class="action-reorder" id="reorderEntries">↕ Reordenar</button>
+        </div>
+        <div class="field"><label for="observaciones">Observaciones</label><textarea id="observaciones" rows="3"></textarea></div>
+        <div class="form-buttons"><button type="submit" class="save-button" id="saveButton">Guardar folio</button><button type="reset" class="clear-button">Limpiar</button></div>
+      </form>
+    </section>
+    <section class="workbook-panel" aria-label="Registro de folios en hoja de cálculo">
+      <div class="sheet-toolbar"><div><span class="eyebrow">LIBRO MUNICIPAL</span><strong>Registro de documentos por folio</strong><span class="workbook-state" id="connectionStatus">Conectando…</span></div><div class="sheet-tools"><input id="searchFolios" type="search" placeholder="Folio, bloque, periodo, nombre…" aria-label="Buscar folios" title="Ejemplos: 10 busca el folio 10; bloque 02; 2019; nombre o documento"><button type="button" id="sortFoliosButton" class="sort-folios-button">↕ Ordenar por bloque</button><button type="button" id="exportButton">⇩ Exportar Excel</button></div></div>
+      <div class="sheet-scroll"><table class="folio-sheet"><colgroup><col class="col-num"><col class="col-block"><col class="col-folio"><col class="col-period"><col class="col-location"><col class="col-type"><col class="col-data"><col class="col-detail"><col class="col-note"><col class="col-total"><col class="col-actions"></colgroup><thead><tr class="municipality-row"><th colspan="11" id="sheetMunicipality">MUNICIPALIDAD DISTRITAL</th></tr><tr class="office-row"><th colspan="11">REGISTRO DE DOCUMENTOS POR FOLIO</th></tr><tr class="sheet-spacer"><th colspan="11"></th></tr><tr class="column-headings"><th>N.º</th><th>N.º Bloque</th><th>N.º Folio</th><th>Periodo</th><th>Ubicación del documento</th><th>Tipo de documento</th><th>Datos registrados</th><th>Cargo / detalle</th><th>Nota de páginas</th><th>Total páginas</th><th>Acciones</th></tr></thead><tbody id="folioRows"></tbody></table><div class="empty-state" id="emptyState"><div class="empty-icon">▦</div><strong>Tu hoja de folios está lista</strong><span>Agrega documentos encontrados a un folio para verlos aquí.</span></div></div>
+      <div class="sheet-pagination" aria-label="Paginación de folios"><span id="searchSummary">0 documentos</span><div class="pagination-controls"><button type="button" id="firstPage" title="Primera página">|◀</button><button type="button" id="previousPage" title="Página anterior">◀</button><span>Pág.</span><select id="pageSelect" aria-label="Ir a página"></select><span id="pageTotal">de 1</span><button type="button" id="nextPage" title="Página siguiente">▶</button><button type="button" id="lastPage" title="Última página">▶|</button></div></div>
+      <div class="sheet-footer"><span class="sheet-tab">Folios</span><span>＋</span><span class="row-count" id="rowCount">0 registros</span></div>
+    </section>
+  </main>
+  <section class="history-panel" aria-labelledby="historyHeading">
+    <div class="history-header"><div><span class="eyebrow">ARCHIVO</span><h2 id="historyHeading">Historial de exportaciones</h2><p>Recupera una copia anterior aunque hayas cambiado o eliminado folios.</p></div><button type="button" id="clearHistory" class="clear-history" hidden>Vaciar historial</button></div>
+    <div id="exportHistory" class="history-list"><p class="history-empty">Todavía no has exportado ningún archivo.</p></div>
+  </section>
+  <script src="app.js"></script>
+</body>
+</html>

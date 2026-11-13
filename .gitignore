@@ -1,0 +1,5 @@
+﻿node_modules/
+.qodo/
+templates/
+folios.json
+informes.json
